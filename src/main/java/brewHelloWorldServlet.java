@@ -6,13 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/hello")
+@WebServlet("/zenith")
 public class brewHelloWorldServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 //        System.out.println("hello world");
         PrintWriter out = res.getWriter();
-        out.println("<h1>hello world<h1><br><h3>this is a smaller heading<h3>");
+        out.println("<h1>Welcome Zenith<h1>");
 
     }
 }
