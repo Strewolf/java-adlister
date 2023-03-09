@@ -15,3 +15,11 @@ public class brewHelloWorldServlet extends HttpServlet {
 
     }
 }
+//@WebServlet("/zenith")
+//public class brewHelloWorldServlet extends HttpServlet{
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException{
+//        PrintWriter out = res.getWriter();
+//        out.println("<h1>heyoo</h1>");
+//    }
+//}
