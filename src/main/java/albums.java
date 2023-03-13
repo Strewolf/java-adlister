@@ -65,4 +65,16 @@ public albums(int id,String artist, String name, int release_date, double sales,
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
+    @Override
+    public String toString() {
+        return "Album{" +
+                "id=" + id +
+                ", artist='" + artist + '\'' +
+                ", name='" + name + '\'' +
+                ", release_date=" + release_date +
+                ",  sales=" + sales +
+                ", genre='" + genre + '\'' +
+                '}';
+    }
 }
