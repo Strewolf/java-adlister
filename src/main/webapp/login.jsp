@@ -5,18 +5,18 @@
   Time: 3:51 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%--<%--%>
-<%--    String inputUsr = request.getParameter("admin");--%>
-<%--String inputPsw = request.getParameter("password");--%>
+<%
+    String inputUsr = request.getParameter("username");
+String inputPsw = request.getParameter("password");
 
-<%--if (inputUsr.equals("admin") && inputPsw.equals("password")) {--%>
-<%--response.sendRedirect("profile.jsp?username=" + inputUsr);--%>
-<%--} else {--%>
-<%--    String message = "Invalid username or password";--%>
-<%--    request.setAttribute("message", message);--%>
-<%--request.getRequestDispatcher("login.jsp").forward(request, response);--%>
-<%--}--%>
-<%--%>--%>
+    if (inputUsr != null && inputUsr.equals("admin") && inputPsw != null && inputPsw.equals("password")) {
+        response.sendRedirect("/profile.jsp?username=" + inputUsr);
+    } else {
+        String message = "Invalid username or password";
+        // add code to display the error message
+    }
+
+%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -40,17 +40,17 @@
 
 
 
-@
 
-<%String message = "";
-    String inputUsr = request.getParameter("admin");
-    String inputPsw = request.getParameter("password");
 
-    if (inputUsr != null && inputPsw != null && inputUsr.equals("admin") && inputPsw.equals("password")) {
-        response.sendRedirect("profile.jsp?username=" + inputUsr);
-    } else {
-        message = "Invalid username or password";
-        request.setAttribute("message", message);
-        request.getRequestDispatcher("login.jsp").forward(request, response);
-    }
-%>
+<%--<%String message = "";--%>
+<%--    String inputUsr = request.getParameter("admin");--%>
+<%--    String inputPsw = request.getParameter("password");--%>
+
+<%--    if (inputUsr != null && inputPsw != null && inputUsr.equals("admin") && inputPsw.equals("password")) {--%>
+<%--        response.sendRedirect("profile.jsp?username=" + inputUsr);--%>
+<%--    } else {--%>
+<%--        message = "Invalid username or password";--%>
+<%--        request.setAttribute("message", message);--%>
+<%--        request.getRequestDispatcher("login.jsp").forward(request, response);--%>
+<%--    }--%>
+<%--%>--%>
