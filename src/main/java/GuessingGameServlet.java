@@ -24,7 +24,7 @@ public class GuessingGameServlet extends HttpServlet {
         } else if (guess >= 1 && guess <= 3) {
             response.sendRedirect("incorrect");
         } else {
-            response.sendRedirect("guess");
+            response.sendRedirect("guessing");
         }
     }
 
