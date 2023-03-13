@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class BeanTest {
     public static void main(String[] args) {
         // Create some Album instances
@@ -9,15 +11,18 @@ public class BeanTest {
         authors author2 = new authors(2, "Tina", "Pavic");
 
         // Create some Quote instances with Author objects
-        quotes quote1 = new quotes(1, 1, "to be or not to be");
-        quotes quote2 = new quotes(2, 2, "whatever you are be a good one");
+        ArrayList<quotes>quote=new ArrayList<quotes>();
+
+        quote.add(new quotes(1, "horace smith", "to be or not to be"));
+        quote.add(new quotes(2, "Tina Pavic", "whatever you are be a good one"));
 
         // Print out the objects
         System.out.println(album1);
         System.out.println(album2);
-        System.out.println(author1);
-        System.out.println(author2);
-        System.out.println(quote1);
-        System.out.println(quote2);
+        for (quotes quotes: quote){
+            System.out.println("author:" + quotes.getAuthor());
+            System.out.println("content" + quotes.getContent());
+
+        }
     }
 }

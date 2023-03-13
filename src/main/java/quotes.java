@@ -1,12 +1,12 @@
 import java.io.Serializable;
 public class quotes implements Serializable {
     private int id;
-    private int authorId;
+    private String author;
     private String content;
 
-    public quotes(int id, int authorId, String content){
+    public quotes(int id, String author, String content){
         this.id=id;
-        this.authorId=authorId;
+        this.author=author;
         this.content=content;
     }
 
@@ -18,12 +18,12 @@ public class quotes implements Serializable {
         this.id = id;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getContent() {
@@ -38,7 +38,7 @@ public class quotes implements Serializable {
     public String toString() {
         return "Quotes{" +
                 "id='" + id + '\'' +
-                ", author_id='" + authorId + '\'' +
+                ", author_id='" + author + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }
