@@ -1,14 +1,14 @@
 import java.io.Serializable;
 public class quotes implements Serializable {
-private int id;
-private String firstName;
-private String lastName;
+    private int id;
+    private int authorId;
+    private String content;
 
-public quotes(int id, String firstName, String lastName){
-    this.firstName=firstName;
-    this.lastName=lastName;
-    this.id=id;
-}
+    public quotes(int id, int authorId, String content){
+        this.id=id;
+        this.authorId=authorId;
+        this.content=content;
+    }
 
     public int getId() {
         return id;
@@ -18,30 +18,28 @@ public quotes(int id, String firstName, String lastName){
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public int getAuthorId() {
+        return authorId;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getContent() {
+        return content;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     @Override
     public String toString() {
         return "Quotes{" +
                 "id='" + id + '\'' +
-                ", first_Name='" + firstName + '\'' +
-                ", last_Name='" + lastName + '\'' +
+                ", author_id='" + authorId + '\'' +
+                ", content='" + content + '\'' +
                 '}';
-
-
-    };
+    }
 }

@@ -2,13 +2,13 @@ import java.io.Serializable;
 
 public class authors implements Serializable {
     private int id;
-    private int authorId;
-    private String content;
+    private String firstName;
+    private String lastName;
 
-    public authors(int id, int authorId, String content){
+    public authors(int id, String firstName, String lastName){
+        this.firstName=firstName;
+        this.lastName=lastName;
         this.id=id;
-        this.authorId=authorId;
-        this.content=content;
     }
 
     public int getId() {
@@ -19,28 +19,30 @@ public class authors implements Serializable {
         this.id = id;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getContent() {
-        return content;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
     public String toString() {
         return "Quotes{" +
                 "id='" + id + '\'' +
-                ", author_id='" + authorId + '\'' +
-                ", content='" + content + '\'' +
+                ", first_Name='" + firstName + '\'' +
+                ", last_Name='" + lastName + '\'' +
                 '}';
-    }
+
+
+    };
 }
