@@ -69,11 +69,11 @@ public albums(int id,String artist, String name, int release_date, double sales,
     @Override
     public String toString() {
         return "Album{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", artist='" + artist + '\'' +
                 ", name='" + name + '\'' +
-                ", release_date=" + release_date +
-                ",  sales=" + sales +
+                ", release_date='" + release_date + '\'' +
+                ",  sales='" + sales + '\'' +
                 ", genre='" + genre + '\'' +
                 '}';
     }
