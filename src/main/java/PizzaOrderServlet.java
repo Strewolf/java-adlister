@@ -21,6 +21,12 @@ public class PizzaOrderServlet extends HttpServlet {
         String sizeType = request.getParameter("sizeType");
         String[] toppings = request.getParameterValues("toppings");
         String deliveryAddress = request.getParameter("deliveryAddress");
+        request.setAttribute("crustType",crustType);
+        request.setAttribute("sauceType",sauceType);
+        request.setAttribute("sizeType",sizeType);
+        request.setAttribute("toppings",toppings);
+        request.setAttribute("deliveryAddress",deliveryAddress);
+
 
         // Output the pizza order details to console
         System.out.println("Pizza Order Details:");
