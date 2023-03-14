@@ -10,12 +10,13 @@
 <jsp:include page="/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>Here Are all the ads!</h1>
-
+    <h1 class="text-center">Here Are all the ads!</h1>
+    <hr>
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
+        <div class="col-md-6 text-center">
             <h2>${ad.title}</h2>
             <p>${ad.description}</p>
+            <hr>
         </div>
     </c:forEach>
 </div>
