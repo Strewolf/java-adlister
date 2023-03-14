@@ -5,4 +5,10 @@ public interface Ads {
     List<Ad> all();
     // insert a new ad and return the new ad's id
     Long insert(Ad ad);
+
+    int create(Ad ad);
+
+    Ad findById(int id);
+
+    List<Ad> findByUserId(int userId);
 }
