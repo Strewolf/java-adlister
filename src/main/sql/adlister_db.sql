@@ -8,6 +8,6 @@ CREATE TABLE ads (
                      FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE USER 'adlister_user'@'localhost' IDENTIFIED BY '';
+CREATE USER 'adlister_user'@'localhost' IDENTIFIED BY 'hello';
 
 GRANT ALL PRIVILEGES ON adlister_db.* TO 'adlister_user'@'localhost';
