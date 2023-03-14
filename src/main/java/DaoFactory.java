@@ -1,12 +1,11 @@
 import java.sql.SQLException;
 
 public class DaoFactory {
-    private static Ads adsDao;
 
-    public static Ads getAdsDao() throws SQLException {
-        if (adsDao == null) {
-            adsDao = new MySQLAdsDao();
-        }
-        return adsDao;
+    public static Ads getAdsDao() {
+        Config config = new Config();
+        return new MySQLAdsDao(config);
     }
+
 }
+

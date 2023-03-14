@@ -5,7 +5,7 @@ import java.util.List;
 public class MySQLAdsDao implements Ads {
     private Connection connection;
 
-    public MySQLAdsDao() {
+    public MySQLAdsDao(Config config) {
         try {
             connection = DriverManager.getConnection(Config.getUrl(), Config.getUser(), Config.getPassword());
         } catch (SQLException e) {
