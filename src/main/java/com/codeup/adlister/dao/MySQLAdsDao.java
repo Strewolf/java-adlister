@@ -14,19 +14,29 @@ import java.util.List;
 public class MySQLAdsDao implements Ads {
     private Connection connection = null;
 
+//    public MySQLAdsDao(Config config) {
+//        try {
+//            DriverManager.registerDriver(new Driver());
+//            connection = DriverManager.getConnection(
+//                    config.getUrl(),
+//                    config.getUser(),
+//                    config.getPassword()
+//            );
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error connecting to the database!", e);
+//        }
+//    }
     public MySQLAdsDao(Config config) {
         try {
-            DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection(
-                    config.getUrl(),
-                    config.getUser(),
-                    config.getPassword()
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException("Error connecting to the database!", e);
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = Config.getUrl();
+            String user = Config.getUser();
+            String password = Config.getPassword();
+            this.connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
-
     @Override
     public List<Ad> all() {
         PreparedStatement stmt = null;
