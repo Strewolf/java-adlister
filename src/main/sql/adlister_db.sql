@@ -8,6 +8,10 @@ CREATE TABLE ads (
                      FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-CREATE USER 'adlister_user'@'localhost' IDENTIFIED BY 'hello';
-
-GRANT ALL PRIVILEGES ON adlister_db.* TO 'adlister_user'@'localhost';
+INSERT INTO users (username, email, password) VALUES ('admin', 'adminuser@example.com', 'password');
+select * from ads;
+INSERT INTO ads (user_id, title, description) VALUES
+                                                  (1, 'Playstation 5', 'worth everything you own'),
+                                                  (1, 'mercedes amg c63', 'my favorite car'),
+                                                  (1, 'bmw gle', 'also favorite car matte black paint only'),
+                                                  (1, '1999 mustang gt', 'my current car built ford tuff');

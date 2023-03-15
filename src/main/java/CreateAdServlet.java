@@ -8,22 +8,19 @@ import java.sql.SQLException;
 
 @WebServlet(name = "CreateAdServlet", urlPatterns = "/ads/create")
 public class CreateAdServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
         request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
-            .forward(request, response);
+                .forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Ad ad = new Ad(
-            1, // for now we'll hardcode the user id
-            request.getParameter("title"),
-            request.getParameter("description")
+                1, // for now we'll hardcode the user id
+                request.getParameter("title"),
+                request.getParameter("description")
         );
-        try {
-            DaoFactory.getAdsDao().insert(ad);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        MySQLAdsDao adsDao = new MySQLAdsDao(new Config());
+        adsDao.insert(ad);
         response.sendRedirect("/ads");
     }
 }

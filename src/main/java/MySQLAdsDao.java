@@ -7,8 +7,12 @@ public class MySQLAdsDao implements Ads {
 
     public MySQLAdsDao(Config config) {
         try {
-            connection = DriverManager.getConnection(Config.getUrl(), Config.getUser(), Config.getPassword());
-        } catch (SQLException e) {
+            Class.forName("com.mysql.jdbc.Driver");
+            String url = Config.getUrl();
+            String user = Config.getUser();
+            String password = Config.getPassword();
+            this.connection = DriverManager.getConnection(url, user, password);
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -20,6 +24,7 @@ public class MySQLAdsDao implements Ads {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
             while (rs.next()) {
+                System.out.println("extracting record");
                 Ad ad = new Ad(
                         rs.getInt("id"),
                         rs.getInt("user_id"),
@@ -100,4 +105,5 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
 }

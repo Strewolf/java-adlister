@@ -10,11 +10,10 @@ import java.util.List;
 @WebServlet(name = "AdsIndexServlet", urlPatterns = "/ads")
 public class AdsIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        MySQLAdsDao adsDao = new MySQLAdsDao(new Config());
+        List<Ad> ads = adsDao.all();
+        System.out.println(ads);
+        request.setAttribute("ads", ads);
         request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
     }
 }
