@@ -34,39 +34,58 @@ import java.sql.SQLException;
 @WebServlet(name = "controllers.RegisterServlet", urlPatterns = "/register")
 public class RegisterServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+        if (request.getSession().getAttribute("user") != null) {
+            response.sendRedirect("/profile");
+            return;
+        }
+        request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
         String email = request.getParameter("email");
+        String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String passwordConfirmation = request.getParameter("confirm_password");
+        System.out.println(username);
+        System.out.println(email);
+        System.out.println(password);
+
+
 
         // TODO: ensure the submitted information is valid
         if (username == null || email == null || password == null ||
-                username.isEmpty() || email.isEmpty() || password.isEmpty() || !password.equals(passwordConfirmation)) {
+                username.isEmpty() || email.isEmpty() || password.isEmpty()){
+            System.out.println("error");
             request.setAttribute("error", "Invalid registration information");
-            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            response.sendRedirect("/register");
             return;
         }
 
         // TODO: create a new user based off of the submitted information
         User user = new User(username, email, password);
-
+        System.out.println(user.getPassword());
         // Attempt to add the user to the database
+//        try {
+//            if (DaoFactory.getUsersDao().createUser(user) == null) {
+//                request.setAttribute("error", "Error creating user");
+//                request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
+//                return;
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+
         try {
-            if (DaoFactory.getUsersDao().insert(user) == null) {
-                request.setAttribute("error", "Error creating user");
-                request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
-                return;
-            }
+            DaoFactory.getUsersDao().createUser(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
         // TODO: if a user was successfully created, send them to their profile
-        request.getSession().setAttribute("user", user);
-        response.sendRedirect("/profile");
+        try {
+            request.getSession().setAttribute("user", DaoFactory.getUsersDao().findByUsername(username));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
     }
 }

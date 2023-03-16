@@ -32,7 +32,7 @@ import java.util.List;
                 stmt.setInt(1, id);
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
-                    user = new User(rs.getInt("id"), rs.getString("username"), rs.getString("email"));
+                    user = new User(rs.getString("username"), rs.getString("email"), rs.getString("password"));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -46,7 +46,7 @@ import java.util.List;
                 PreparedStatement stmt = connection.prepareStatement("SELECT * FROM users");
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    User user = new User((int) rs.getLong("id"), rs.getString("username"), rs.getString("email"));
+                    User user = new User(rs.getString("username"), rs.getString("email"), rs.getString("password"));
                     users.add(user);
                 }
             } catch (SQLException e) {
@@ -56,10 +56,16 @@ import java.util.List;
         }
 
         public void createUser(User user) {
+            User newUser = new User(user.getUsername(), user.getEmail(), user.getPassword());
+//            System.out.println(newUser.getPassword());
             try {
-                PreparedStatement stmt = connection.prepareStatement("INSERT INTO users (username, email, password) VALUES (?, ?,?)");
-                stmt.setString(1, user.getUsername());
-                stmt.setString(2, user.getEmail());
+//                CREATE A USER
+
+//                ADD CREATED USER TO DATABASE
+                PreparedStatement stmt = connection.prepareStatement("INSERT INTO users (username, email, password) VALUES (?, ?,?)",Statement.RETURN_GENERATED_KEYS);
+                stmt.setString(1, newUser.getUsername());
+                stmt.setString(2, newUser.getEmail());
+                stmt.setString(3, newUser.getPassword());
                 stmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -71,7 +77,7 @@ import java.util.List;
                 PreparedStatement stmt = connection.prepareStatement("UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?");
                 stmt.setString(1, user.getUsername());
                 stmt.setString(2, user.getEmail());
-                stmt.setString(2, user.getPassword());
+                stmt.setString(3, user.getPassword());
                 stmt.executeUpdate();
             } catch (SQLException e) {
                 e.printStackTrace();

@@ -18,8 +18,8 @@
 <h1>Please Register</h1>
 <form action="/register" method="POST">
     <div class="form-group">
-        <label for="rusername">Email</label>
-        <input id="remail" name="username" class="form-control" type="text">
+        <label for="remail">Email</label>
+        <input id="remail" name="email" class="form-control" type="text">
     </div>
     <div class="form-group">
         <label for="rusername">Username</label>
