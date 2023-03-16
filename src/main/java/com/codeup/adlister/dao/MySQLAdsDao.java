@@ -1,10 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
-import com.mysql.cj.jdbc.Driver;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,4 +90,48 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+    @Override
+    public Ad findById(int id) {
+        Ad ad = null;
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM ads WHERE id = ?");
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                ad = new Ad(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("title"),
+                        rs.getString("description")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ad;
+    }
+
+    @Override
+    public List<Ad> findByUserId(int userId) {
+        List<Ad> ads = new ArrayList<>();
+        try {
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM ads WHERE user_id = ?");
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Ad ad = new Ad(
+                        rs.getInt("id"),
+                        rs.getInt("user_id"),
+                        rs.getString("title"),
+                        rs.getString("description")
+                );
+                ads.add(ad);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ads;
+    }
+
 }
