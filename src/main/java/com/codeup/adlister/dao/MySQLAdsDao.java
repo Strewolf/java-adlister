@@ -1,24 +1,30 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
+import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLAdsDao implements Ads {
-    private Connection connection = null;
-    public MySQLAdsDao(javax.servlet.jsp.jstl.core.Config config) {
+    private Connection connection;
+    public MySQLAdsDao(Config config) {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = Config.getUrl();
-            String user = Config.getUser();
-            String password = Config.getPassword();
-            this.connection = DriverManager.getConnection(url, user, password);
-        } catch (SQLException | ClassNotFoundException e) {
+            DriverManager.registerDriver(new Driver());
+            connection = DriverManager.getConnection(
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
+            );
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
 //    public MySQLAdsDao(javax.servlet.jsp.jstl.core.Config config) {
 //
@@ -133,5 +139,6 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
-
 }
+
+

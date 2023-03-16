@@ -27,6 +27,16 @@ public class ListAdsDao implements Ads {
         return ad.getId();
     }
 
+    @Override
+    public Ad findById(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Ad> findByUserId(int userId) {
+        return null;
+    }
+
     private List<Ad> generateAds() {
         List<Ad> ads = new ArrayList<>();
         ads.add(new Ad(
