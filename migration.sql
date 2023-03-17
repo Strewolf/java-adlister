@@ -21,4 +21,5 @@ CREATE TABLE ads (
         ON DELETE CASCADE
 );
 
-select * from users
+delete from users  where id = 2;
+select * from ads

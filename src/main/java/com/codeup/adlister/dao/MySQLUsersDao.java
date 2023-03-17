@@ -116,6 +116,27 @@ import java.util.List;
         }
 
         @Override
+        public User findByEmail(String email) {
+            try {
+                String query = "SELECT * FROM users WHERE email = ?";
+                PreparedStatement stmt = connection.prepareStatement(query);
+                stmt.setString(1, email);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return new User(
+                            rs.getLong("id"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("password")
+                    );
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException("Error finding user by username", e);
+            }
+            return null;
+        }
+
+        @Override
         public Long insert(User user) {
             return null;
         }

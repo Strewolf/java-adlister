@@ -66,16 +66,27 @@ public class LoginServlet extends HttpServlet {
         User user = null;
         try {
             user = DaoFactory.getUsersDao().findByUsername(username);
+            System.out.println("username found");
         } catch (SQLException e) {
+            System.out.println("no username found");
+            throw new RuntimeException(e);
+        }
+        try {
+            user = DaoFactory.getUsersDao().findByEmail(user.getEmail());
+            System.out.println("email found");
+        } catch (SQLException e) {
+            System.out.println("no email found");
             throw new RuntimeException(e);
         }
 
-        boolean validAttempt = user != null && password.equals(user.getPassword());
+        boolean validAttempt = user != null && password.equals(user.getPassword()) && username.equals(user.getUsername());
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
             response.sendRedirect("/profile");
+            System.out.println("valid attempt");
         } else {
+            System.out.println("not valid attempt");
             response.sendRedirect("/login");
         }
     }

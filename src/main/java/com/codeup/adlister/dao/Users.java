@@ -6,4 +6,5 @@ public interface Users {
     User findByUsername(String username);
     Long insert(User user);
     void createUser(User user);
+    User findByEmail(String email);
 }
